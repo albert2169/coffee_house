@@ -1,6 +1,10 @@
-import 'package:coffee_house/screens/scanner_screen.dart';
+import 'package:coffee_house/screens/constants/coffee_house_constants.dart';
+import 'package:coffee_house/screens/widgets/club_card.dart';
 import 'package:coffee_house/screens/widgets/coffee_house_app_bar.dart';
 import 'package:coffee_house/screens/widgets/coffee_house_nav_bar.dart';
+import 'package:coffee_house/screens/widgets/coffee_house_options.dart';
+import 'package:coffee_house/screens/widgets/news_section.dart';
+import 'package:coffee_house/screens/widgets/scan_action_button.dart';
 import 'package:flutter/material.dart';
 
 class CoffeeHouseMainScreen extends StatefulWidget {
@@ -25,35 +29,27 @@ class _CoffeeHouseMainScreenState extends State<CoffeeHouseMainScreen>
       backgroundColor: Color(0xFFEEEEEE),
       body: SafeArea(
         child: Padding(
-          padding: const EdgeInsets.symmetric(horizontal: 16),
+          padding: const EdgeInsets.symmetric(vertical: 16, horizontal: 16),
           child: Column(
+            spacing: 20,
             crossAxisAlignment: CrossAxisAlignment.start,
-            children: [],
+            children: [
+              ClubCard(),
+              Row(
+                spacing: 10,
+                children: [
+                  ...CoffeeHouseConstants.coffeeHouseOptions.map<Widget>(
+                    (option) => CoffeeHouseOption(option: option, onTap: () {}),
+                  ),
+                ],
+              ),
+              NewsSection()
+            ],
           ),
         ),
       ),
       floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
-      floatingActionButton: SizedBox(
-        height: 65,
-        width: 65,
-        child: FloatingActionButton(
-          backgroundColor: const Color(0xFFDE111F),
-          elevation: 4,
-          shape: const CircleBorder(),
-          onPressed: () async {
-            final result = await Navigator.push(
-              context,
-              MaterialPageRoute(builder: (_) => const ScannerScreen()),
-            );
-
-            if (result != null) {
-              print('Scanned: $result');
-            }
-          },
-          child: Icon(Icons.qr_code_scanner, color: Colors.white, size: 35),
-        ),
-      ),
-
+      floatingActionButton: ScanActionButton(),
       bottomNavigationBar: CoffeeHouseNavBar(
         currentIndex: _currentNavBarIndex,
         onTap: (index) {

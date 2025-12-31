@@ -48,7 +48,7 @@ class CoffeeHouseNavBar extends StatelessWidget {
     );
   }
 
-  Widget _buildNavItem({required int index, required CoffeeHouseNavBarItem item}) {
+  Widget _buildNavItem({required int index, required IconTextItem item}) {
     final bool isSelected = currentIndex == index;
     final Color color = isSelected
         ? const Color(0xFFDE111F)

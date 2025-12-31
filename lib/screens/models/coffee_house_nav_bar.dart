@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
-class CoffeeHouseNavBarItem {
+class IconTextItem {
   final String name;
   final IconData iconData;
-  const CoffeeHouseNavBarItem({required this.name, required this.iconData});
+  const IconTextItem({required this.name, required this.iconData});
 }
