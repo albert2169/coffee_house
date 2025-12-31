@@ -1,4 +1,5 @@
 class CoffeeHouseNews {
+  final String date;
   final String imagePath;
   final Map<String, dynamic> reactions;
   final String instagramPostPath;
@@ -13,5 +14,6 @@ class CoffeeHouseNews {
     required this.title,
     required this.slogan,
     required this.description,
+    required this.date,
   });
 }

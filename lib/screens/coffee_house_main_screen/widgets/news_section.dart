@@ -1,9 +1,17 @@
-import 'package:coffee_house/screens/constants/coffee_house_constants.dart';
+import 'package:coffee_house/constants/coffee_house_constants.dart';
+import 'package:coffee_house/models/coffee_house_news.dart';
+import 'package:coffee_house/screens/coffee_house_main_screen/widgets/coffee_house_news_bottom_sheet.dart';
+import 'package:coffee_house/screens/news_screen.dart';
 import 'package:flutter/material.dart';
 
-class NewsSection extends StatelessWidget {
+class NewsSection extends StatefulWidget {
   const NewsSection({super.key});
 
+  @override
+  State<NewsSection> createState() => _NewsSectionState();
+}
+
+class _NewsSectionState extends State<NewsSection> {
   @override
   Widget build(BuildContext context) {
     return Column(
@@ -23,7 +31,12 @@ class NewsSection extends StatelessWidget {
               ),
             ),
             GestureDetector(
-              onTap: () {},
+              onTap: () => Navigator.of(context).push(
+                MaterialPageRoute(
+                  builder: (context) =>
+                      NewsScreen(allNews: CoffeeHouseConstants.coffeeHouseNews),
+                ),
+              ),
               child: Text(
                 'դիտել բոլորը',
                 style: TextStyle(
@@ -45,13 +58,29 @@ class NewsSection extends StatelessWidget {
                 .map<Widget>(
                   (newsModel) => Padding(
                     padding: const EdgeInsets.only(right: 10),
-                    child: Image.asset(newsModel.imagePath, fit: BoxFit.fitHeight),
+                    child: GestureDetector(
+                      onTap: () => _showNews(newsModel),
+                      child: Image.asset(
+                        newsModel.imagePath,
+                        fit: BoxFit.fitHeight,
+                      ),
+                    ),
                   ),
                 )
                 .toList(),
           ),
         ),
       ],
+    );
+  }
+
+  void _showNews(CoffeeHouseNews news) {
+    showModalBottomSheet(
+      context: context,
+      isScrollControlled: true,
+      backgroundColor: Colors.transparent,
+      useSafeArea: true,
+      builder: (context) => CoffeeHouseNewsBottomSheet(newsModel: news),
     );
   }
 }

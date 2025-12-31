@@ -1,5 +1,5 @@
-import 'package:coffee_house/screens/models/coffee_house_nav_bar.dart';
-import 'package:coffee_house/screens/models/coffee_house_news.dart';
+import 'package:coffee_house/models/coffee_house_nav_bar.dart';
+import 'package:coffee_house/models/coffee_house_news.dart';
 import 'package:flutter/material.dart';
 
 class CoffeeHouseConstants {
@@ -17,6 +17,7 @@ class CoffeeHouseConstants {
 
   static const List<CoffeeHouseNews> coffeeHouseNews = [
     CoffeeHouseNews(
+      date: '09.12.2025',
       imagePath: 'assets/images/news1.png',
       title: 'Սպասում ենք քեզ Seasons Park Station-ում 🤠',
       slogan:
@@ -27,6 +28,8 @@ class CoffeeHouseConstants {
       reactions: {'😂': 6, '🥳': 18, '❤️': 64, '👍': 8},
     ),
     CoffeeHouseNews(
+      date: '11.12.2025',
+
       imagePath: 'assets/images/news2.png',
       title: 'Coffee House x Light Affect ❤️',
       slogan: 'Մեր 4-րդ մասնաճյուղը Գյումրիում՝ նոր, ոճային ֆորմատով',
@@ -41,6 +44,7 @@ class CoffeeHouseConstants {
       reactions: {'😂': 2, '🥳': 13, '❤️': 34, '👍': 4},
     ),
     CoffeeHouseNews(
+      date: '12.12.2025',
       imagePath: 'assets/images/news3.png',
       title: 'Մենք Big Christmas Market-ում ենք 🎅🏼🥨',
       slogan: '🎄 Դեկտեմբերի 17, 18, 19, 20, 21 🎄',
@@ -55,6 +59,7 @@ class CoffeeHouseConstants {
       reactions: {'😂': 7, '🥳': 22, '❤️': 78, '👍': 12},
     ),
     CoffeeHouseNews(
+      date: '23.12.2025',
       imagePath: 'assets/images/news4.png',
       title: 'Holly Jolly և Jingle Ginger ✨',
       slogan: 'երկու սուրճ, մեկ ձմեռային կախարդանք',

@@ -1,5 +1,5 @@
-import 'package:coffee_house/screens/constants/coffee_house_constants.dart';
-import 'package:coffee_house/screens/models/coffee_house_nav_bar.dart';
+import 'package:coffee_house/constants/coffee_house_constants.dart';
+import 'package:coffee_house/models/coffee_house_nav_bar.dart';
 import 'package:flutter/material.dart';
 
 class CoffeeHouseNavBar extends StatelessWidget {

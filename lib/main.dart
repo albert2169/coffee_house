@@ -1,4 +1,4 @@
-import 'package:coffee_house/screens/coffee_house_main_screen.dart';
+import 'package:coffee_house/screens/coffee_house_main_screen/coffee_house_main_screen.dart';
 import 'package:flutter/material.dart';
 
 void main() {

@@ -1,10 +1,10 @@
-import 'package:coffee_house/screens/constants/coffee_house_constants.dart';
-import 'package:coffee_house/screens/widgets/club_card.dart';
-import 'package:coffee_house/screens/widgets/coffee_house_app_bar.dart';
-import 'package:coffee_house/screens/widgets/coffee_house_nav_bar.dart';
-import 'package:coffee_house/screens/widgets/coffee_house_options.dart';
-import 'package:coffee_house/screens/widgets/news_section.dart';
-import 'package:coffee_house/screens/widgets/scan_action_button.dart';
+import 'package:coffee_house/constants/coffee_house_constants.dart';
+import 'package:coffee_house/screens/coffee_house_main_screen/widgets/club_card.dart';
+import 'package:coffee_house/screens/coffee_house_main_screen/widgets/coffee_house_app_bar.dart';
+import 'package:coffee_house/screens/coffee_house_main_screen/widgets/coffee_house_nav_bar.dart';
+import 'package:coffee_house/screens/coffee_house_main_screen/widgets/coffee_house_options.dart';
+import 'package:coffee_house/screens/coffee_house_main_screen/widgets/news_section.dart';
+import 'package:coffee_house/screens/coffee_house_main_screen/widgets/scan_action_button.dart';
 import 'package:flutter/material.dart';
 
 class CoffeeHouseMainScreen extends StatefulWidget {
