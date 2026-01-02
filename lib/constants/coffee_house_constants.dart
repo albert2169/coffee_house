@@ -1,8 +1,24 @@
-import 'package:coffee_house/models/coffee_house_nav_bar.dart';
+import 'package:coffee_house/constants/hot_coffee_constants.dart';
+import 'package:coffee_house/models/icon_text_item.dart';
 import 'package:coffee_house/models/coffee_house_news.dart';
+import 'package:coffee_house/models/coffee_info.dart';
 import 'package:flutter/material.dart';
 
 class CoffeeHouseConstants {
+  static const List<IconTextItem> coffeeTabs = [
+    IconTextItem(name: 'Hot Coffee', iconData: Icons.coffee),
+    IconTextItem(name: 'Tea', iconData: Icons.emoji_food_beverage),
+    IconTextItem(name: 'Iced Coffee', iconData: Icons.local_drink),
+    IconTextItem(name: 'Icded Drink', iconData: Icons.blender),
+    IconTextItem(name: 'Sweets', iconData: Icons.cake),
+  ];
+  static const Map<String, List<CoffeeInfo>> coffees = {
+    'hot_coffee': HotCoffeeConstants.hotCoffees,
+    'matcha_and_tea': [],
+    'iced_coffee': [],
+    'iced_drinks': [],
+    'sweets': [],
+  };
   static const List<IconTextItem> bottomNavigationBar = [
     IconTextItem(name: 'Գլխավոր էջ', iconData: Icons.home_filled),
     IconTextItem(name: 'Պատվիրել', iconData: Icons.location_on_outlined),
@@ -10,7 +26,11 @@ class CoffeeHouseConstants {
     IconTextItem(name: 'Ավելին', iconData: Icons.apps_rounded),
   ];
   static const List<IconTextItem> coffeeHouseOptions = [
-    IconTextItem(name: 'Գնահատել', iconData: Icons.star_border_outlined),
+    IconTextItem(
+      name: 'Մենյու',
+      iconData: Icons.menu_book,
+      needToNavigate: true,
+    ),
     IconTextItem(name: 'Պատմություն', iconData: Icons.history_outlined),
     IconTextItem(name: 'Նախընտրած', iconData: Icons.favorite_outline_sharp),
   ];

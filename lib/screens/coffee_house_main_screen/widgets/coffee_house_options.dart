@@ -1,4 +1,4 @@
-import 'package:coffee_house/models/coffee_house_nav_bar.dart';
+import 'package:coffee_house/models/icon_text_item.dart';
 import 'package:flutter/material.dart';
 
 class CoffeeHouseOption extends StatelessWidget {
@@ -25,7 +25,7 @@ class CoffeeHouseOption extends StatelessWidget {
           child: Column(
             spacing: 10,
             children: [
-              Icon(option.iconData, size: 50, color: Color(0xFF656565)),
+              Icon(option.iconData, size: 50, color: Color(0xFFB70005)),
               Text(option.name, style: TextStyle(color: Color(0xFF656565))),
             ],
           ),

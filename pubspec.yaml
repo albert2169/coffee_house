@@ -25,4 +25,5 @@ flutter:
 
   assets:
     - assets/images/
+    - assets/images/coffees/hot_coffees/
 

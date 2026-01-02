@@ -5,6 +5,7 @@ import 'package:coffee_house/screens/coffee_house_main_screen/widgets/coffee_hou
 import 'package:coffee_house/screens/coffee_house_main_screen/widgets/coffee_house_options.dart';
 import 'package:coffee_house/screens/coffee_house_main_screen/widgets/news_section.dart';
 import 'package:coffee_house/screens/coffee_house_main_screen/widgets/scan_action_button.dart';
+import 'package:coffee_house/screens/coffees_screen/coffees_screen.dart';
 import 'package:flutter/material.dart';
 
 class CoffeeHouseMainScreen extends StatefulWidget {
@@ -39,11 +40,22 @@ class _CoffeeHouseMainScreenState extends State<CoffeeHouseMainScreen>
                 spacing: 10,
                 children: [
                   ...CoffeeHouseConstants.coffeeHouseOptions.map<Widget>(
-                    (option) => CoffeeHouseOption(option: option, onTap: () {}),
+                    (option) => CoffeeHouseOption(
+                      option: option,
+                      onTap: () {
+                        if (option.needToNavigate) {
+                          Navigator.of(context).push(
+                            MaterialPageRoute(
+                              builder: (context) => CoffeesScreen(),
+                            ),
+                          );
+                        }
+                      },
+                    ),
                   ),
                 ],
               ),
-              NewsSection()
+              NewsSection(),
             ],
           ),
         ),
