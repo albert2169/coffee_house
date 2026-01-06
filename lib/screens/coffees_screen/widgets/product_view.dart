@@ -1,17 +1,17 @@
-import 'package:coffee_house/models/coffee_info.dart';
+import 'package:coffee_house/models/drink_info.dart';
 import 'package:flutter/material.dart';
 
 class ProductView extends StatelessWidget {
-  final CoffeeInfo coffeeInfo;
+  final DrinkInfo drinkInfo;
   final Function() onTap;
-  const ProductView({super.key, required this.coffeeInfo, required this.onTap});
+  const ProductView({super.key, required this.drinkInfo, required this.onTap});
 
   @override
   Widget build(BuildContext context) {
     return Padding(
       padding: const EdgeInsets.only(bottom: 10),
       child: Opacity(
-        opacity: coffeeInfo.isSoldOut ? 0.3 : 1,
+        opacity: drinkInfo.isSoldOut ? 0.3 : 1,
         child: GestureDetector(
           onTap: onTap,
           child: Container(
@@ -26,31 +26,34 @@ class ProductView extends StatelessWidget {
                 children: [
                   SizedBox(
                     width: MediaQuery.of(context).size.width / 3,
-                    child: Image.asset(coffeeInfo.imagePath),
+                    child: Image.asset(drinkInfo.imagePath),
                   ),
+                  const SizedBox(width: 20),
                   Expanded(
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
                         Text(
-                          coffeeInfo.name,
+                          drinkInfo.name,
                           style: TextStyle(color: Colors.black, fontSize: 18),
                         ),
                         const SizedBox(height: 5),
                         Text(
-                          coffeeInfo.about,
+                          drinkInfo.about,
+                          maxLines: 3,
+                          overflow: TextOverflow.ellipsis,
                           style: TextStyle(
                             color: Color(0xFF919191),
                             fontSize: 13,
                           ),
                         ),
                         const SizedBox(height: 5),
-                        if (coffeeInfo.isNewYearMagic)
+                        if (drinkInfo.isNewYearMagic)
                           _newContainer(text: 'NEW YEAR MAGIC'),
-                        if (coffeeInfo.isNew) _newContainer(text: 'NEW'),
+                        if (drinkInfo.isNew) _newContainer(text: 'NEW'),
                         Spacer(),
                         Text(
-                          '${coffeeInfo.price['standard']} ֏',
+                          '${drinkInfo.price['standard']} ֏',
                           style: TextStyle(color: Colors.black, fontSize: 18),
                         ),
                       ],

@@ -1,39 +1,39 @@
 import 'package:coffee_house/constants/coffee_house_constants.dart';
-import 'package:coffee_house/models/coffee_info.dart';
+import 'package:coffee_house/models/drink_info.dart';
 import 'package:coffee_house/screens/coffees_screen/widgets/coffees_tab_bar.dart';
 import 'package:coffee_house/screens/coffees_screen/widgets/product_view.dart';
 import 'package:flutter/material.dart';
 
-class CoffeesScreen extends StatefulWidget {
-  const CoffeesScreen({super.key});
+class DrinksScreen extends StatefulWidget {
+  const DrinksScreen({super.key});
 
   @override
-  State<CoffeesScreen> createState() => _CoffeesScreenState();
+  State<DrinksScreen> createState() => _DrinksScreenState();
 }
 
-class _CoffeesScreenState extends State<CoffeesScreen>
+class _DrinksScreenState extends State<DrinksScreen>
     with TickerProviderStateMixin {
-  late TabController _coffeeTapBarController;
-  late List<CoffeeInfo> _coffees;
-  late List<String> _coffeesTabMapKeys;
+  late TabController _drinksTapBarController;
+  late List<DrinkInfo> _drinks;
+  late List<String> _drinksTabMapKeys;
   @override
   void initState() {
     super.initState();
-    _coffees = [
-      ...CoffeeHouseConstants.coffees['hot_coffee'] as List<CoffeeInfo>,
+    _drinks = [
+      ...CoffeeHouseConstants.coffees['hot_coffee'] as List<DrinkInfo>,
     ];
-    _coffeesTabMapKeys = CoffeeHouseConstants.coffees.keys.toList();
-    _coffeeTapBarController = TabController(
+    _drinksTabMapKeys = CoffeeHouseConstants.coffees.keys.toList();
+    _drinksTapBarController = TabController(
       animationDuration: const Duration(milliseconds: 200),
-      length: CoffeeHouseConstants.coffeeTabs.length,
+      length: CoffeeHouseConstants.drinkTabs.length,
       vsync: this,
     );
-    _coffeeTapBarController.addListener(() {
+    _drinksTapBarController.addListener(() {
       setState(() {
-        _coffees =
+        _drinks =
             CoffeeHouseConstants
-                    .coffees[_coffeesTabMapKeys[_coffeeTapBarController.index]]
-                as List<CoffeeInfo>;
+                    .coffees[_drinksTabMapKeys[_drinksTapBarController.index]]
+                as List<DrinkInfo>;
       });
     });
   }
@@ -56,15 +56,15 @@ class _CoffeesScreenState extends State<CoffeesScreen>
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             CoffeesTabBar(
-              controller: _coffeeTapBarController,
-              tabs: CoffeeHouseConstants.coffeeTabs,
+              controller: _drinksTapBarController,
+              tabs: CoffeeHouseConstants.drinkTabs,
             ),
             const SizedBox(height: 10),
             Expanded(
               child: ListView.builder(
-                itemCount: _coffees.length,
+                itemCount: _drinks.length,
                 itemBuilder: (context, index) {
-                  return ProductView(coffeeInfo: _coffees[index], onTap: () {});
+                  return ProductView(drinkInfo: _drinks[index], onTap: () {});
                 },
               ),
             ),

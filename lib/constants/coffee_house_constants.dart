@@ -1,23 +1,27 @@
 import 'package:coffee_house/constants/hot_coffee_constants.dart';
+import 'package:coffee_house/constants/iced_coffee_constants.dart';
+import 'package:coffee_house/constants/iced_tea_constants.dart';
+import 'package:coffee_house/constants/sweet_constants.dart';
+import 'package:coffee_house/constants/tea_constants.dart';
 import 'package:coffee_house/models/icon_text_item.dart';
 import 'package:coffee_house/models/coffee_house_news.dart';
-import 'package:coffee_house/models/coffee_info.dart';
+import 'package:coffee_house/models/drink_info.dart';
 import 'package:flutter/material.dart';
 
 class CoffeeHouseConstants {
-  static const List<IconTextItem> coffeeTabs = [
+  static const List<IconTextItem> drinkTabs = [
     IconTextItem(name: 'Hot Coffee', iconData: Icons.coffee),
-    IconTextItem(name: 'Tea', iconData: Icons.emoji_food_beverage),
+    IconTextItem(name: 'Hot Tea', iconData: Icons.emoji_food_beverage),
+    IconTextItem(name: 'Iced Tea', iconData: Icons.no_drinks),
     IconTextItem(name: 'Iced Coffee', iconData: Icons.local_drink),
-    IconTextItem(name: 'Icded Drink', iconData: Icons.blender),
     IconTextItem(name: 'Sweets', iconData: Icons.cake),
   ];
-  static const Map<String, List<CoffeeInfo>> coffees = {
+  static const Map<String, List<DrinkInfo>> coffees = {
     'hot_coffee': HotCoffeeConstants.hotCoffees,
-    'matcha_and_tea': [],
-    'iced_coffee': [],
-    'iced_drinks': [],
-    'sweets': [],
+    'hot_tea': TeaConstants.teas,
+    'iced_tea': IcedTeaConstants.icedTeas,
+    'iced_coffee': IcedCoffeeConstants.icedCoffees,
+    'sweets': SweetConstants.sweets,
   };
   static const List<IconTextItem> bottomNavigationBar = [
     IconTextItem(name: 'Գլխավոր էջ', iconData: Icons.home_filled),

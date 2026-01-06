@@ -25,5 +25,9 @@ flutter:
 
   assets:
     - assets/images/
-    - assets/images/coffees/hot_coffees/
+    - assets/images/drinks/hot_coffees/
+    - assets/images/drinks/tea/
+    - assets/images/drinks/iced_coffees/
+    - assets/images/drinks/sweets/
+    - assets/images/drinks/iced_teas/
 

@@ -1,6 +1,6 @@
-import 'package:coffee_house/models/coffee_type.dart';
+import 'package:coffee_house/models/drink_type.dart';
 
-class CoffeeInfo {
+class DrinkInfo {
   final bool isSoldOut;
   final CoffeeType type;
   final String imagePath;
@@ -12,18 +12,20 @@ class CoffeeInfo {
   final Map<String, int?> milkInfo;
   final Map<String, int> syropeInfo;
   final Map<String, int> additions;
+  final Map<String,List<String>> additionType;
 
-  const CoffeeInfo({
+  const DrinkInfo({
+    required this.price,
     required this.type,
     required this.imagePath,
     required this.name,
     required this.about,
     this.isNewYearMagic = false,
     this.isNew = false,
-    required this.price,
-    required this.milkInfo,
-    required this.syropeInfo,
-    required this.additions,
     this.isSoldOut = false,
+    this.additionType = const {},
+    this.syropeInfo = const {},
+    this.milkInfo = const {},
+    this.additions = const {},
   });
 }
