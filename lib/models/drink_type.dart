@@ -1,1 +1,1 @@
-enum CoffeeType { hotCoffe, matchaAndTea, icedCoffee, icedTeas,sweets }
+enum DrinkTypeEnum { hotCoffe, matchaAndTea, icedCoffee, icedTeas,sweets }

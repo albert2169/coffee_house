@@ -1,0 +1,1 @@
+enum CupSize { standard, xl }

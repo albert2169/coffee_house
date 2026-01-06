@@ -1,7 +1,8 @@
 import 'package:coffee_house/constants/coffee_house_constants.dart';
 import 'package:coffee_house/models/drink_info.dart';
-import 'package:coffee_house/screens/coffees_screen/widgets/coffees_tab_bar.dart';
-import 'package:coffee_house/screens/coffees_screen/widgets/product_view.dart';
+import 'package:coffee_house/screens/drinks_screen/widgets/coffees_tab_bar.dart';
+import 'package:coffee_house/screens/drinks_screen/widgets/product_view.dart';
+import 'package:coffee_house/screens/drinks_screen/widgets/single_drink_bottom_sheet/single_drink_bottom_sheet.dart';
 import 'package:flutter/material.dart';
 
 class DrinksScreen extends StatefulWidget {
@@ -64,13 +65,31 @@ class _DrinksScreenState extends State<DrinksScreen>
               child: ListView.builder(
                 itemCount: _drinks.length,
                 itemBuilder: (context, index) {
-                  return ProductView(drinkInfo: _drinks[index], onTap: () {});
+                  return ProductView(
+                    drinkInfo: _drinks[index],
+                    onTap: () {
+                      if (_drinks[index].isSoldOut) {
+                        return;
+                      }
+                      _showSingleDrink(_drinks[index]);
+                    },
+                  );
                 },
               ),
             ),
           ],
         ),
       ),
+    );
+  }
+
+  void _showSingleDrink(DrinkInfo drinkInfo) {
+    showModalBottomSheet(
+      context: context,
+      isScrollControlled: true,
+      backgroundColor: Colors.transparent,
+      useSafeArea: true,
+      builder: (context) => SingleDrinkBottomSheet(drinkInfo: drinkInfo),
     );
   }
 }

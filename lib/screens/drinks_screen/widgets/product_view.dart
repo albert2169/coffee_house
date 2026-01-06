@@ -1,3 +1,4 @@
+import 'package:coffee_house/models/cup_size.dart';
 import 'package:coffee_house/models/drink_info.dart';
 import 'package:flutter/material.dart';
 
@@ -53,7 +54,7 @@ class ProductView extends StatelessWidget {
                         if (drinkInfo.isNew) _newContainer(text: 'NEW'),
                         Spacer(),
                         Text(
-                          '${drinkInfo.price['standard']} ֏',
+                          '${drinkInfo.price[CupSize.standard]} ֏',
                           style: TextStyle(color: Colors.black, fontSize: 18),
                         ),
                       ],
