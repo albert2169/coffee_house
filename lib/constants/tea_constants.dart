@@ -1,4 +1,3 @@
-import 'package:coffee_house/models/cup_size.dart';
 import 'package:coffee_house/models/drink_info.dart';
 import 'package:coffee_house/models/drink_type.dart';
 
@@ -9,7 +8,7 @@ class TeaConstants {
       imagePath: 'assets/images/drinks/tea/tea1.png',
       name: 'Blueberry Tea',
       about: 'Հապալասի օշարակով բնական տաք թեյ է՝ լիմոնի հավելումով',
-      price: {CupSize.standard: 750},
+      price: {'Standard': 750},
       additions: {'Կիտրոն': 50},
       isNew: true,
     ),
@@ -18,7 +17,7 @@ class TeaConstants {
       imagePath: 'assets/images/drinks/tea/tea2.png',
       name: 'Tea Cranberry',
       about: 'Լոռամրգի օշարակով թեյ՝ լոռամրգով, լիմոնով և նանայով',
-      price: {CupSize.standard: 750},
+      price: {'Standard': 750},
       additions: {'Կիտրոն': 50},
     ),
     DrinkInfo(
@@ -26,7 +25,7 @@ class TeaConstants {
       imagePath: 'assets/images/drinks/tea/tea3.png',
       name: 'Pomegranate Tea',
       about: 'Նռան օշարակով բնական տաք թեյ է (միջին քաղցրության)',
-      price: {CupSize.standard: 750},
+      price: {'Standard': 750},
       additions: {'Կիտրոն': 50},
     ),
     DrinkInfo(
@@ -35,7 +34,7 @@ class TeaConstants {
       name: 'Immuno Tea',
       about:
           'Մեղրով բնական տաք թեյ է՝ լիմոնի, իմբիրի և դարչնի հավելումով(միջին քաղցրության)',
-      price: {CupSize.standard: 750},
+      price: {'Standard': 750},
       additions: {'Կիտրոն': 50},
     ),
     DrinkInfo(
@@ -44,7 +43,7 @@ class TeaConstants {
       name: 'Citrus Tea',
       about:
           'Ցիտրուսային օշարակով բնական տաք թեյ է ՝ լիմոնի և նարնջի հավելումով (միջին քաղցրության)',
-      price: {CupSize.standard: 750},
+      price: {'Standard': 750},
       additions: {'Կիտրոն': 50},
     ),
     DrinkInfo(
@@ -53,7 +52,7 @@ class TeaConstants {
       imagePath: 'assets/images/drinks/tea/tea6.png',
       name: 'Green Tea',
       about: 'Թրմվող տաք թեյ ՝ կանաչ հիմքով',
-      price: {CupSize.standard: 450},
+      price: {'Standard': 450},
       additions: {'Կիտրոն': 50},
       additionType: {
         'Տեսակներ': ['Կանաչ Թեյ', 'Ուրց, Դաղձ և Երիցուկ', 'Դեղձ, Ելակ և Մանգո'],
@@ -65,7 +64,7 @@ class TeaConstants {
       imagePath: 'assets/images/drinks/tea/tea7.png',
       name: 'Herbal Tea',
       about: 'Թրմվող տաք թեյ ՝ չորամրգերի հիմքով',
-      price: {CupSize.standard: 450},
+      price: {'Standard': 450},
       additionType: {
         'Բուսական թեյ': ['Սև թեյ', 'Նարինջ, Դարչին, Լիմոն և Մեխակ'],
       },
@@ -75,7 +74,7 @@ class TeaConstants {
       imagePath: 'assets/images/drinks/tea/tea8.png',
       name: 'Black Tea',
       about: 'Թրմվող տաք թեյ ՝ սև հիմքով',
-      price: {CupSize.standard: 450},
+      price: {'Standard': 450},
       additionType: {
         'Տեսակներ': ['Սև թեյ', 'Նարինջ, Դարչին, Լիմոն և Մեխակ'],
       },

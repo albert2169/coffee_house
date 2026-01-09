@@ -26,7 +26,7 @@ class _DrinkAdditionCheckboxsState extends State<DrinkAdditionCheckboxs> {
       children: [
         Text(
           widget.sectionTitle,
-          style: TextStyle(
+          style: const TextStyle(
             color: Colors.black,
             fontSize: 14,
             fontWeight: FontWeight.w600,
@@ -36,34 +36,63 @@ class _DrinkAdditionCheckboxsState extends State<DrinkAdditionCheckboxs> {
         ...widget.additions.entries.map((entry) {
           final additionName = entry.key;
           final price = entry.value;
-          final bool isSelected = widget.selectedAddition == null
-              ? false
-              : additionName == widget.selectedAddition!.key;
-          return Row(
-            mainAxisAlignment: MainAxisAlignment.start,
-            children: [
-              Checkbox(
-                value: isSelected,
-                onChanged: (value) {
-              
-                  widget.onAdditionChange(entry);
-                },
-              ),
-              const SizedBox(width: 5),
-              Text(additionName, style: TextStyle(color: Colors.black)),
-              Spacer(),
-              if (price != null)
-                Text(
-                  '+ $price ֏',
-                  style: const TextStyle(
-                    color: Color(0xFF909090),
-                    fontSize: 15,
+
+          final bool isSelected = widget.selectedAddition?.key == additionName;
+
+          return InkWell(
+            onTap: () => widget.onAdditionChange(entry),
+            borderRadius: BorderRadius.circular(8),
+            child: Padding(
+              padding: const EdgeInsets.symmetric(vertical: 6),
+              child: Row(
+                children: [
+                  _CustomCheckbox(isChecked: isSelected),
+                  const SizedBox(width: 10),
+                  Text(
+                    additionName,
+                    style: const TextStyle(color: Colors.black, fontSize: 15),
                   ),
-                ),
-            ],
+                  const Spacer(),
+                  if (price != null)
+                    Text(
+                      '+ $price ֏',
+                      style: const TextStyle(
+                        color: Color(0xFF909090),
+                        fontSize: 15,
+                      ),
+                    ),
+                ],
+              ),
+            ),
           );
         }),
       ],
+    );
+  }
+}
+
+class _CustomCheckbox extends StatelessWidget {
+  final bool isChecked;
+
+  const _CustomCheckbox({required this.isChecked});
+
+  @override
+  Widget build(BuildContext context) {
+    return AnimatedContainer(
+      duration: const Duration(milliseconds: 200),
+      width: 22,
+      height: 22,
+      decoration: BoxDecoration(
+        borderRadius: BorderRadius.circular(6),
+        border: Border.all(
+          color: isChecked ? Colors.transparent : Colors.grey,
+          width: 2,
+        ),
+        color: isChecked ? Colors.red : Colors.transparent,
+      ),
+      child: isChecked
+          ? const Icon(Icons.check, size: 20, color: Colors.white)
+          : null,
     );
   }
 }

@@ -1,8 +1,9 @@
-import 'package:coffee_house/models/cup_size.dart';
 import 'package:coffee_house/models/drink_addition_checkboxs.dart';
 import 'package:coffee_house/models/drink_info.dart';
+import 'package:coffee_house/models/drink_type.dart';
+import 'package:coffee_house/models/sweetness_enum.dart';
 import 'package:coffee_house/screens/drinks_screen/widgets/single_drink_bottom_sheet/widgets/addition_type_radio_button.dart';
-import 'package:coffee_house/screens/drinks_screen/widgets/single_drink_bottom_sheet/widgets/cup_size_checkbox.dart';
+import 'package:coffee_house/screens/drinks_screen/widgets/single_drink_bottom_sheet/widgets/radio_buttons.dart';
 import 'package:flutter/material.dart';
 
 class SingleDrinkBottomSheet extends StatefulWidget {
@@ -20,18 +21,24 @@ class _SingleDrinkBottomSheetState extends State<SingleDrinkBottomSheet> {
   MapEntry<String, int?>? _selectedAdditionMilk;
   MapEntry<String, int?>? _selectedAddition;
   MapEntry<String, int?>? _selectedAdditionSyropeInfo;
-  CupSize _currentCupSize = CupSize.standard;
+  String _currentCupSize = 'Standard';
+  String _currentSweetness = SweetnessEnum.noSugar.displayName;
+  bool _isWithLessIceCube = false;
+  Map<String, int?> _sweetnessMap = {};
+  MapEntry<String, int?>? _selectedIceMap;
   @override
   void initState() {
     super.initState();
-    _price = widget.drinkInfo.price[CupSize.standard] as int;
-    _priceDifferenceBetweenCupSize =
-        widget.drinkInfo.price.containsKey(CupSize.xl)
-        ? (widget.drinkInfo.price[CupSize.xl] as int) - _price
+    _price = widget.drinkInfo.price['Standard'] as int;
+    _priceDifferenceBetweenCupSize = widget.drinkInfo.price.containsKey('XL')
+        ? (widget.drinkInfo.price['XL'] as int) - _price
         : 0;
     _currentSelectedAdditionType = widget.drinkInfo.additionType.isNotEmpty
         ? widget.drinkInfo.additionType.values.first.first
         : '';
+    _sweetnessMap = {
+      for (final sweetness in SweetnessEnum.values) sweetness.displayName: null,
+    };
   }
 
   @override
@@ -83,14 +90,14 @@ class _SingleDrinkBottomSheetState extends State<SingleDrinkBottomSheet> {
                       style: TextStyle(color: Color(0xFF9D9D9D), fontSize: 13),
                     ),
                     const SizedBox(height: 30),
-                    if (widget.drinkInfo.price.containsKey(CupSize.xl))
-                      CupSizeSelector(
-                        currentCupSize: _currentCupSize,
-                        prices: widget.drinkInfo.price,
+                    if (widget.drinkInfo.price.containsKey('XL'))
+                      RadioButtons(
+                        currentRadioButton: _currentCupSize,
+                        radioButtons: widget.drinkInfo.price,
                         onChange: (cupSize) {
                           setState(() {
                             _currentCupSize = cupSize;
-                            _price += cupSize == CupSize.standard
+                            _price += cupSize == 'Standard'
                                 ? -_priceDifferenceBetweenCupSize
                                 : _priceDifferenceBetweenCupSize;
                           });
@@ -108,16 +115,67 @@ class _SingleDrinkBottomSheetState extends State<SingleDrinkBottomSheet> {
                       ),
                     if (widget.drinkInfo.milkInfo.isNotEmpty)
                       Padding(
-                        padding: const EdgeInsets.only(top: 30),
+                        padding: const EdgeInsets.only(top: 15),
                         child: DrinkAdditionCheckboxs(
                           additions: widget.drinkInfo.milkInfo,
                           sectionTitle: 'Կաթ',
                           selectedAddition: _selectedAdditionMilk,
-                          onAdditionChange: onAdditionChangeMilk,
+                          onAdditionChange: _onAdditionChangeMilk,
                         ),
                       ),
-
-                    //if(widget.drinkInfo.type == DrinkTypeEnum.icedCoffee)
+                    if (widget.drinkInfo.type == DrinkTypeEnum.icedCoffee)
+                      Padding(
+                        padding: const EdgeInsets.only(top: 10),
+                        child: DrinkAdditionCheckboxs(
+                          selectedAddition: _selectedIceMap,
+                          sectionTitle: 'Սառույց',
+                          additions: {'Քիչ սառույց': null},
+                          onAdditionChange: (ice) {
+                            setState(() {
+                              if (_isWithLessIceCube) {
+                                _selectedIceMap = null;
+                              } else {
+                                _selectedIceMap = ice;
+                              }
+                              _isWithLessIceCube = !_isWithLessIceCube;
+                            });
+                          },
+                        ),
+                      ),
+                    if (widget.drinkInfo.type != DrinkTypeEnum.sweets)
+                      Padding(
+                        padding: const EdgeInsets.only(top: 10),
+                        child: RadioButtons(
+                          sectionTitle: 'Շաքար',
+                          currentRadioButton: _currentSweetness,
+                          radioButtons: _sweetnessMap,
+                          onChange: (newSweetness) {
+                            setState(() {
+                              _currentSweetness = newSweetness;
+                            });
+                          },
+                        ),
+                      ),
+                    if (widget.drinkInfo.syropeInfo.isNotEmpty)
+                      Padding(
+                        padding: const EdgeInsets.only(top: 15),
+                        child: DrinkAdditionCheckboxs(
+                          additions: widget.drinkInfo.syropeInfo,
+                          sectionTitle: 'Օշարակ',
+                          selectedAddition: _selectedAdditionSyropeInfo,
+                          onAdditionChange: _onSyropeInfoChange,
+                        ),
+                      ),
+                    if (widget.drinkInfo.additions.isNotEmpty)
+                      Padding(
+                        padding: const EdgeInsets.only(top: 15),
+                        child: DrinkAdditionCheckboxs(
+                          additions: widget.drinkInfo.additions,
+                          sectionTitle: 'Հավելումներ',
+                          selectedAddition: _selectedAddition,
+                          onAdditionChange: _onAdditionChange,
+                        ),
+                      ),
                   ],
                 ),
               ),
@@ -128,7 +186,7 @@ class _SingleDrinkBottomSheetState extends State<SingleDrinkBottomSheet> {
     );
   }
 
-  void onAdditionChangeMilk(MapEntry<String, int?> selectedMilkAdditionEntry) {
+  void _onAdditionChangeMilk(MapEntry<String, int?> selectedMilkAdditionEntry) {
     setState(() {
       if (selectedMilkAdditionEntry.key == _selectedAdditionMilk?.key) {
         _selectedAdditionMilk = null;
@@ -140,6 +198,38 @@ class _SingleDrinkBottomSheetState extends State<SingleDrinkBottomSheet> {
         _price -= _selectedAdditionMilk?.value ?? 0;
         _price += selectedMilkAdditionEntry.value ?? 0;
         _selectedAdditionMilk = selectedMilkAdditionEntry;
+      }
+    });
+  }
+
+  void _onSyropeInfoChange(MapEntry<String, int?> selectedAdditionSyropeInfo) {
+    setState(() {
+      if (selectedAdditionSyropeInfo.key == _selectedAdditionSyropeInfo?.key) {
+        _selectedAdditionSyropeInfo = null;
+        _price -= selectedAdditionSyropeInfo.value ?? 0;
+      } else if (_selectedAdditionSyropeInfo == null) {
+        _selectedAdditionSyropeInfo = selectedAdditionSyropeInfo;
+        _price += selectedAdditionSyropeInfo.value ?? 0;
+      } else {
+        _price -= _selectedAdditionSyropeInfo?.value ?? 0;
+        _price += selectedAdditionSyropeInfo.value ?? 0;
+        _selectedAdditionSyropeInfo = selectedAdditionSyropeInfo;
+      }
+    });
+  }
+
+  void _onAdditionChange(MapEntry<String, int?> selectedAddition) {
+    setState(() {
+      if (selectedAddition.key == _selectedAddition?.key) {
+        _selectedAddition = null;
+        _price -= selectedAddition.value ?? 0;
+      } else if (_selectedAddition == null) {
+        _selectedAddition = selectedAddition;
+        _price += selectedAddition.value ?? 0;
+      } else {
+        _price -= _selectedAddition?.value ?? 0;
+        _price += selectedAddition.value ?? 0;
+        _selectedAddition = selectedAddition;
       }
     });
   }

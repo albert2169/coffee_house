@@ -1,5 +1,4 @@
 
-import 'package:coffee_house/models/cup_size.dart';
 import 'package:coffee_house/models/drink_type.dart';
 
 class DrinkInfo {
@@ -10,7 +9,7 @@ class DrinkInfo {
   final String about;
   final bool isNewYearMagic;
   final bool isNew;
-  final Map<CupSize, int> price;
+  final Map<String, int> price;
   final Map<String, int?> milkInfo;
   final Map<String, int?> syropeInfo;
   final Map<String, int?> additions;

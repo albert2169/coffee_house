@@ -1,4 +1,3 @@
-import 'package:coffee_house/models/cup_size.dart';
 import 'package:coffee_house/models/drink_info.dart';
 import 'package:coffee_house/models/drink_type.dart';
 
@@ -9,7 +8,7 @@ class IcedTeaConstants {
       imagePath: 'assets/images/drinks/iced_teas/iced_tea1.png',
       name: 'Iced Tea Cosmo',
       about: 'Սառը հատապտղային թեյ կարկադեի հիմքով',
-      price: {CupSize.standard: 450, CupSize.xl: 700},
+      price: {'Standard': 450, 'XL': 700},
       isNewYearMagic: true,
     ),
     DrinkInfo(
@@ -17,7 +16,7 @@ class IcedTeaConstants {
       imagePath: 'assets/images/drinks/iced_teas/iced_tea2.png',
       name: 'Bumble Matcha',
       about: 'Մատչայի հիմքով սառը ըմպելիք է՝ նարնջի հյութի և նարնջի հավելումով',
-      price: {CupSize.standard: 900, CupSize.xl: 1200},
+      price: {'Standard': 900, 'XL': 1200},
     ),
     DrinkInfo(
       isSoldOut: true,
@@ -26,7 +25,7 @@ class IcedTeaConstants {
       name: 'Iced Sky Matcha',
       about:
           'Կապույտ մատչելի հիմքով կաթնային ու սերուցքային քաղցր սառը ըմպելիք՝ cream cheese-ի ու brown suagr-ի օշարակով',
-      price: {CupSize.standard: 1200, CupSize.xl: 1600},
+      price: {'Standard': 1200, 'XL': 1600},
     ),
     DrinkInfo(
       type: DrinkTypeEnum.icedTeas,
@@ -34,14 +33,14 @@ class IcedTeaConstants {
       name: 'Iced Matcha Raf Rasperry',
       about:
           'Մատչայի հիմքով սերուցքային և կաթնային ըմպելիք՝ ազնվամորու օշարակի հավելումով',
-      price: {CupSize.standard: 1000, CupSize.xl: 1400},
+      price: {'Standard': 1000, 'XL': 1400},
     ),
     DrinkInfo(
       type: DrinkTypeEnum.icedTeas,
       imagePath: 'assets/images/drinks/iced_teas/iced_tea5.png',
       name: 'Iced Matcha Latte',
       about: 'Ճապոնական կանաչ թեյի հիմքով թույլ կաթնային ըմպելիք',
-      price: {CupSize.standard: 900, CupSize.xl: 1200},
+      price: {'Standard': 900, 'XL': 1200},
       milkInfo: {
         'Կաթ': null,
         'Բանանի կաթ': 200,

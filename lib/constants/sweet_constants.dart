@@ -1,4 +1,3 @@
-import 'package:coffee_house/models/cup_size.dart';
 import 'package:coffee_house/models/drink_info.dart';
 import 'package:coffee_house/models/drink_type.dart';
 
@@ -9,7 +8,7 @@ class SweetConstants {
       imagePath: 'assets/images/drinks/sweets/cake1.png',
       name: 'Dubai Cheesecake',
       about: 'Դասական չիզքեյք ՝ Դուբայի շոկոլադի մոտիվներով',
-      price: {CupSize.standard: 1500},
+      price: {'Standard': 1500},
       isNew: true,
     ),
     DrinkInfo(
@@ -18,14 +17,14 @@ class SweetConstants {
       name: 'Pop-oks',
       about:
           'Խրթխրթան խմոր ՝ եփված խտացրած կաթով, պիստակի կրեմով և նուտելլայով, 1 բաժակ 6 հատ',
-      price: {CupSize.standard: 1200},
+      price: {'Standard': 1200},
     ),
     DrinkInfo(
       type: DrinkTypeEnum.sweets,
       imagePath: 'assets/images/drinks/sweets/cake3.png',
       name: 'Brownie',
       about: 'Հիմնական բաղադրիչներն են սև և դառը շոկոլադները',
-      price: {CupSize.standard: 850},
+      price: {'Standard': 850},
     ),
     // DrinkInfo(
     //   type: DrinkTypeEnum.sweets,

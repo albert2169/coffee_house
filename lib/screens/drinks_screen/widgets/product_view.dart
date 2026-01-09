@@ -54,7 +54,7 @@ class ProductView extends StatelessWidget {
                         if (drinkInfo.isNew) _newContainer(text: 'NEW'),
                         Spacer(),
                         Text(
-                          '${drinkInfo.price[CupSize.standard]} ֏',
+                          '${drinkInfo.price['Standard']} ֏',
                           style: TextStyle(color: Colors.black, fontSize: 18),
                         ),
                       ],
