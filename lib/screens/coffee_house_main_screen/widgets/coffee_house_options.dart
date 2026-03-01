@@ -26,7 +26,7 @@ class CoffeeHouseOption extends StatelessWidget {
             spacing: 10,
             children: [
               Icon(option.iconData, size: 50, color: Color(0xFFB70005)),
-              Text(option.name, style: TextStyle(color: Color(0xFF656565))),
+              Text(option.name, style: TextStyle(color: Color(0xFF656565), fontSize: 13)),
             ],
           ),
         ),

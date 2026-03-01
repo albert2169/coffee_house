@@ -57,127 +57,134 @@ class _SingleDrinkBottomSheetState extends State<SingleDrinkBottomSheet> {
           child: SafeArea(
             child: Padding(
               padding: EdgeInsets.only(left: 20, right: 20, bottom: 20),
-              child: SingleChildScrollView(
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    Image.asset(
-                      widget.drinkInfo.imagePath,
-                      width: double.infinity,
-                      height: MediaQuery.of(context).size.height / 2,
-                      fit: BoxFit.scaleDown,
+              child: Column(
+                children: [
+                  Image.asset(
+                    widget.drinkInfo.imagePath,
+                    width: double.infinity,
+                    height: MediaQuery.of(context).size.height / 2,
+                    fit: BoxFit.scaleDown,
+                  ),
+                  Text(
+                    widget.drinkInfo.name,
+                    style: TextStyle(
+                      color: Colors.black,
+                      fontWeight: FontWeight.w600,
+                      fontSize: 18,
                     ),
-                    Text(
-                      widget.drinkInfo.name,
-                      style: TextStyle(
-                        color: Colors.black,
-                        fontWeight: FontWeight.w600,
-                        fontSize: 18,
+                  ),
+                  const SizedBox(height: 10),
+                  Text(
+                    '$_price ֏',
+                    style: TextStyle(
+                      color: Colors.black,
+                      fontWeight: FontWeight.w600,
+                      fontSize: 18,
+                    ),
+                  ),
+                  const SizedBox(height: 10),
+                  Text(
+                    widget.drinkInfo.about,
+                    style: TextStyle(color: Color(0xFF9D9D9D), fontSize: 13),
+                  ),
+                                    const SizedBox(height: 20),
+
+                  Expanded(
+                    child: SingleChildScrollView(
+                      child: Column(
+                        children: [
+                          const SizedBox(height: 30),
+                          if (widget.drinkInfo.price.containsKey('XL'))
+                            RadioButtons(
+                              currentRadioButton: _currentCupSize,
+                              radioButtons: widget.drinkInfo.price,
+                              onChange: (cupSize) {
+                                setState(() {
+                                  _currentCupSize = cupSize;
+                                  _price += cupSize == 'Standard'
+                                      ? -_priceDifferenceBetweenCupSize
+                                      : _priceDifferenceBetweenCupSize;
+                                });
+                              },
+                            ),
+                          if (widget.drinkInfo.additionType.isNotEmpty)
+                            AdditionTypeRadioButton(
+                              currentSelectedType: _currentSelectedAdditionType,
+                              additionType: widget.drinkInfo.additionType,
+                              onChange: (selectedType) {
+                                setState(() {
+                                  _currentSelectedAdditionType = selectedType;
+                                });
+                              },
+                            ),
+                          if (widget.drinkInfo.milkInfo.isNotEmpty)
+                            Padding(
+                              padding: const EdgeInsets.only(top: 15),
+                              child: DrinkAdditionCheckboxs(
+                                additions: widget.drinkInfo.milkInfo,
+                                sectionTitle: 'Կաթ',
+                                selectedAddition: _selectedAdditionMilk,
+                                onAdditionChange: _onAdditionChangeMilk,
+                              ),
+                            ),
+                          if (widget.drinkInfo.type == DrinkTypeEnum.icedCoffee)
+                            Padding(
+                              padding: const EdgeInsets.only(top: 10),
+                              child: DrinkAdditionCheckboxs(
+                                selectedAddition: _selectedIceMap,
+                                sectionTitle: 'Սառույց',
+                                additions: {'Քիչ սառույց': null},
+                                onAdditionChange: (ice) {
+                                  setState(() {
+                                    if (_isWithLessIceCube) {
+                                      _selectedIceMap = null;
+                                    } else {
+                                      _selectedIceMap = ice;
+                                    }
+                                    _isWithLessIceCube = !_isWithLessIceCube;
+                                  });
+                                },
+                              ),
+                            ),
+                          if (widget.drinkInfo.type != DrinkTypeEnum.sweets)
+                            Padding(
+                              padding: const EdgeInsets.only(top: 10),
+                              child: RadioButtons(
+                                sectionTitle: 'Շաքար',
+                                currentRadioButton: _currentSweetness,
+                                radioButtons: _sweetnessMap,
+                                onChange: (newSweetness) {
+                                  setState(() {
+                                    _currentSweetness = newSweetness;
+                                  });
+                                },
+                              ),
+                            ),
+                          if (widget.drinkInfo.syropeInfo.isNotEmpty)
+                            Padding(
+                              padding: const EdgeInsets.only(top: 15),
+                              child: DrinkAdditionCheckboxs(
+                                additions: widget.drinkInfo.syropeInfo,
+                                sectionTitle: 'Օշարակ',
+                                selectedAddition: _selectedAdditionSyropeInfo,
+                                onAdditionChange: _onSyropeInfoChange,
+                              ),
+                            ),
+                          if (widget.drinkInfo.additions.isNotEmpty)
+                            Padding(
+                              padding: const EdgeInsets.only(top: 15),
+                              child: DrinkAdditionCheckboxs(
+                                additions: widget.drinkInfo.additions,
+                                sectionTitle: 'Հավելումներ',
+                                selectedAddition: _selectedAddition,
+                                onAdditionChange: _onAdditionChange,
+                              ),
+                            ),
+                        ],
                       ),
                     ),
-                    const SizedBox(height: 40),
-                    Text(
-                      '$_price ֏',
-                      style: TextStyle(
-                        color: Colors.black,
-                        fontWeight: FontWeight.w600,
-                        fontSize: 18,
-                      ),
-                    ),
-                    const SizedBox(height: 30),
-                    Text(
-                      widget.drinkInfo.about,
-                      style: TextStyle(color: Color(0xFF9D9D9D), fontSize: 13),
-                    ),
-                    const SizedBox(height: 30),
-                    if (widget.drinkInfo.price.containsKey('XL'))
-                      RadioButtons(
-                        currentRadioButton: _currentCupSize,
-                        radioButtons: widget.drinkInfo.price,
-                        onChange: (cupSize) {
-                          setState(() {
-                            _currentCupSize = cupSize;
-                            _price += cupSize == 'Standard'
-                                ? -_priceDifferenceBetweenCupSize
-                                : _priceDifferenceBetweenCupSize;
-                          });
-                        },
-                      ),
-                    if (widget.drinkInfo.additionType.isNotEmpty)
-                      AdditionTypeRadioButton(
-                        currentSelectedType: _currentSelectedAdditionType,
-                        additionType: widget.drinkInfo.additionType,
-                        onChange: (selectedType) {
-                          setState(() {
-                            _currentSelectedAdditionType = selectedType;
-                          });
-                        },
-                      ),
-                    if (widget.drinkInfo.milkInfo.isNotEmpty)
-                      Padding(
-                        padding: const EdgeInsets.only(top: 15),
-                        child: DrinkAdditionCheckboxs(
-                          additions: widget.drinkInfo.milkInfo,
-                          sectionTitle: 'Կաթ',
-                          selectedAddition: _selectedAdditionMilk,
-                          onAdditionChange: _onAdditionChangeMilk,
-                        ),
-                      ),
-                    if (widget.drinkInfo.type == DrinkTypeEnum.icedCoffee)
-                      Padding(
-                        padding: const EdgeInsets.only(top: 10),
-                        child: DrinkAdditionCheckboxs(
-                          selectedAddition: _selectedIceMap,
-                          sectionTitle: 'Սառույց',
-                          additions: {'Քիչ սառույց': null},
-                          onAdditionChange: (ice) {
-                            setState(() {
-                              if (_isWithLessIceCube) {
-                                _selectedIceMap = null;
-                              } else {
-                                _selectedIceMap = ice;
-                              }
-                              _isWithLessIceCube = !_isWithLessIceCube;
-                            });
-                          },
-                        ),
-                      ),
-                    if (widget.drinkInfo.type != DrinkTypeEnum.sweets)
-                      Padding(
-                        padding: const EdgeInsets.only(top: 10),
-                        child: RadioButtons(
-                          sectionTitle: 'Շաքար',
-                          currentRadioButton: _currentSweetness,
-                          radioButtons: _sweetnessMap,
-                          onChange: (newSweetness) {
-                            setState(() {
-                              _currentSweetness = newSweetness;
-                            });
-                          },
-                        ),
-                      ),
-                    if (widget.drinkInfo.syropeInfo.isNotEmpty)
-                      Padding(
-                        padding: const EdgeInsets.only(top: 15),
-                        child: DrinkAdditionCheckboxs(
-                          additions: widget.drinkInfo.syropeInfo,
-                          sectionTitle: 'Օշարակ',
-                          selectedAddition: _selectedAdditionSyropeInfo,
-                          onAdditionChange: _onSyropeInfoChange,
-                        ),
-                      ),
-                    if (widget.drinkInfo.additions.isNotEmpty)
-                      Padding(
-                        padding: const EdgeInsets.only(top: 15),
-                        child: DrinkAdditionCheckboxs(
-                          additions: widget.drinkInfo.additions,
-                          sectionTitle: 'Հավելումներ',
-                          selectedAddition: _selectedAddition,
-                          onAdditionChange: _onAdditionChange,
-                        ),
-                      ),
-                  ],
-                ),
+                  ),
+                ],
               ),
             ),
           ),
